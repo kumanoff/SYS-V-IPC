@@ -17,8 +17,9 @@ int main(void) {
    int msqid;
    int toend;
    key_t key;
+   char * fname = "queue.c";
    
-   if ((key = ftok("msgq.txt", 'B')) == -1) {
+   if ((key = ftok(fname, 'B')) == -1) {
       perror("ftok");
       exit(1);
    }

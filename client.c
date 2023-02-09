@@ -18,9 +18,10 @@ int main(void) {
    int msqid;
    int len;
    key_t key;
-   system("touch msgq.txt");
-   
-   if ((key = ftok("msgq.txt", 'B')) == -1) {
+   //system("touch msgq.txt");
+   char * fname = "queue.c";
+
+   if ((key = ftok(fname, 'B')) == -1) {
       perror("ftok");
       exit(1);
    }
