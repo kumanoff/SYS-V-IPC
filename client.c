@@ -34,13 +34,14 @@ int main(void) {
    printf("Enter lines of text, ^D to quit:\n");
    buf.mtype = 1; /* we don't really care in this case */
    
-   while(fgets(buf.mtext, sizeof buf.mtext, stdin) != NULL) {
-      len = strlen(buf.mtext);
-      /* remove newline at end, if it exists */
-      if (buf.mtext[len-1] == '\n') buf.mtext[len-1] = '\0';
-      if (msgsnd(msqid, &buf, len+1, 0) == -1) /* +1 for '\0' */
-      perror("msgsnd");
-   }
+   
+   fgets(buf.mtext, sizeof buf.mtext, stdin);
+   len = strlen(buf.mtext);
+   /* remove newline at end, if it exists */
+   if (buf.mtext[len-1] == '\n') buf.mtext[len-1] = '\0';
+   if (msgsnd(msqid, &buf, len+1, 0) == -1) /* +1 for '\0' */
+   perror("msgsnd");
+   
    strcpy(buf.mtext, "end");
    len = strlen(buf.mtext);
    if (msgsnd(msqid, &buf, len+1, 0) == -1) /* +1 for '\0' */
